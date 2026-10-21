@@ -1,0 +1,13 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.ElGranPadre {
+    width: 100vw;
+    padding: 2vh;
+    gap: 4vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
