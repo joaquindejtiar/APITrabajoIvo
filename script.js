@@ -13,12 +13,24 @@ let personajes = [];
 
 const ElDad = document.getElementById("ElGranPadreID");
 
-function mostrarPersonajes(lista) {
-    personajes.innerHTML = ``
+function mostrarPersonajes() {
+    ElDad.innerHTML = "";
 
-    lista.forEach( comida => {
-        personajes.innerHTML += `
-        
-        `
-    })
+    lista.forEach(personaje => {
+        fetch(personaje.url)
+            .then(response => response.json())
+            .then(datosPokemon => {
+                ElDad.innerHTML += `
+                    <div class="personaje">
+                        <h2>${datosPokemon.name}</h2>
+                        <img src="${datosPokemon.sprites.front_default}" alt="${datosPokemon.name}">
+                        <p>Altura: ${datosPokemon.height}</p>
+                        <p>Peso: ${datosPokemon.weight}</p>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                console.error("Error al obtener un Pokémon:", error);
+            });
+    });
 }
