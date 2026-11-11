@@ -13,11 +13,12 @@ fetch (`https://pokeapi.co/api/v2/pokemon`)
 let personajes = [];
 
 const ElDad = document.getElementById("ElGranPadreID");
+const busqueda = document.getElementById("buscador");
 
-function mostrarPersonajes() {
+function mostrarPersonajes(lista) {
     ElDad.innerHTML = "";
 
-    personajes.forEach(personaje => {
+    lista.forEach(personaje => {
         fetch(personaje.url)
             .then(response => response.json())
             .then(datosPokemon => {
@@ -43,3 +44,15 @@ function mostrarPersonajes() {
             });
     });
 }
+
+function buscar() {
+
+    let personajesFiltrados = personajes.filter(personaje => {
+        return personaje.name.toLowerCase().includes(busqueda.value.toLowerCase());
+    });
+
+    mostrarPersonajes(personajesFiltrados);
+
+}
+
+busqueda.addEventListener("input", buscar);
