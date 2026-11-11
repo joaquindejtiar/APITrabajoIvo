@@ -4,6 +4,7 @@ fetch (`https://pokeapi.co/api/v2/pokemon`)
     console.log(data);
     personajes = data.results;
     console.log(personajes);
+    mostrarPersonajes();
 })
 .catch(error => {
     console.error(`Error al leer el archivo JSON:`, error);
@@ -16,16 +17,24 @@ const ElDad = document.getElementById("ElGranPadreID");
 function mostrarPersonajes() {
     ElDad.innerHTML = "";
 
-    lista.forEach(personaje => {
+    personajes.forEach(personaje => {
         fetch(personaje.url)
             .then(response => response.json())
             .then(datosPokemon => {
                 ElDad.innerHTML += `
-                    <div class="personaje">
-                        <h2>${datosPokemon.name}</h2>
-                        <img src="${datosPokemon.sprites.front_default}" alt="${datosPokemon.name}">
-                        <p>Altura: ${datosPokemon.height}</p>
-                        <p>Peso: ${datosPokemon.weight}</p>
+                    <div class="personajeDiv">
+                    <header class="elCabeza">
+                        <h2 class="elNombre">${datosPokemon.name.toUpperCase()}</h2>
+                        </header>
+                        <body class="elCuerpo">
+                        <article class="elDadImagen">
+                        <img class="laImagen" src="${datosPokemon.sprites.front_default}" alt="${datosPokemon.name}">
+                        </article>
+                        <article class="AlturaYpeso">
+                        <p class="laAltura">Altura: ${datosPokemon.height}</p>
+                        <p class="elPeso">Peso: ${datosPokemon.weight}</p>
+                        </article>
+                        </body>
                     </div>
                 `;
             })
